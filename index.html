@@ -13,24 +13,24 @@
     <style>
         #map {
             width: 100%;
-            height: 100vh; /* Adjust as needed */
+            height: 100vh;
         }
 
         .popup-image {
-            max-width: 100%; /* Ensure images don't overflow */
-            height: auto; /* Maintain aspect ratio */
+            max-width: 100%; 
+            height: auto; 
         }
 
         /* Media Queries for Responsive Design */
         @media (max-width: 768px) {
             #map {
-                height: 70vh; /* Example adjustment for smaller screens */
+                height: 70vh; 
             }
         }
 
         @media (max-width: 480px) {
             #map {
-                height: 50vh; /* Further adjustment for very small screens */
+                height: 50vh;
             }
         }
     </style>
@@ -52,7 +52,7 @@
     <script src="data/Lydetyt_2.js"></script>
     <script>
         var map = L.map('map', {
-            zoomControl: false, // Disable default zoom control
+            zoomControl: false,
             maxZoom: 28,
             minZoom: 1
         }).fitBounds([[59.652190699321054, 20.557625671829296], [60.583038890403714, 23.860613794939244]]);
@@ -80,19 +80,19 @@
             return tempDiv.innerHTML;
         }
 
-        // Function to add class to format popup if it contains media
+        //
         function addClassToPopupIfMedia(content, popup) {
             var tempDiv = document.createElement('div');
             tempDiv.innerHTML = content;
             if (tempDiv.querySelector('td img')) {
                 popup._contentNode.classList.add('media');
-                setTimeout(function () { popup.update(); }, 10); // Delay to force the redraw
+                setTimeout(function () { popup.update(); }, 10);
             } else {
                 popup._contentNode.classList.remove('media');
             }
         }
 
-        // Function to handle pop-up for Saaret_1 layer
+        //
         function pop_Saaret_1(feature, layer) {
             var popupContent = '<table><tr><td colspan="2">' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td></tr></table>';
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
