@@ -15,19 +15,15 @@
             width: 100%;
             height: 100vh;
         }
-
         .popup-image {
-            max-width: 100%; 
-            height: auto; 
+            max-width: 100%;
+            height: auto;
         }
-
-        /* Media Queries for Responsive Design */
         @media (max-width: 768px) {
             #map {
-                height: 70vh; 
+                height: 70vh;
             }
         }
-
         @media (max-width: 480px) {
             #map {
                 height: 50vh;
@@ -38,7 +34,6 @@
 <body>
     <div id="map"></div>
 
-    <!-- Include your JavaScript libraries -->
     <script src="js/qgis2web_expressions.js"></script>
     <script src="js/leaflet.js"></script>
     <script src="js/leaflet.rotatedMarker.js"></script>
@@ -50,6 +45,7 @@
     <script src="js/labels.js"></script>
     <script src="data/Saaret_1.js"></script>
     <script src="data/Lydetyt_2.js"></script>
+
     <script>
         var map = L.map('map', {
             zoomControl: false,
@@ -57,15 +53,12 @@
             minZoom: 1
         }).fitBounds([[59.652190699321054, 20.557625671829296], [60.583038890403714, 23.860613794939244]]);
 
-        var hash = new L.Hash(map); // Add hash for URL hash tracking
+        var hash = new L.Hash(map);
 
-        // Attribution control for map
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
 
-        // Autolinker configuration
         var autolinker = new Autolinker({ truncate: { length: 30, location: 'smart' } });
 
-        // Function to remove empty rows from popup content
         function removeEmptyRowsFromPopupContent(content, feature) {
             var tempDiv = document.createElement('div');
             tempDiv.innerHTML = content;
@@ -80,7 +73,6 @@
             return tempDiv.innerHTML;
         }
 
-        //
         function addClassToPopupIfMedia(content, popup) {
             var tempDiv = document.createElement('div');
             tempDiv.innerHTML = content;
@@ -92,7 +84,6 @@
             }
         }
 
-        //
         function pop_Saaret_1(feature, layer) {
             var popupContent = '<table><tr><td colspan="2">' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td></tr></table>';
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
@@ -102,7 +93,6 @@
             layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        // Function to define style for Saaret_1 layer
         function style_Saaret_1_0() {
             return {
                 pane: 'pane_Saaret_1',
@@ -119,12 +109,10 @@
             };
         }
 
-        // Create pane for Saaret_1 layer
         map.createPane('pane_Saaret_1');
         map.getPane('pane_Saaret_1').style.zIndex = 401;
         map.getPane('pane_Saaret_1').style['mix-blend-mode'] = 'normal';
 
-        // Add Saaret_1 layer to the map
         var layer_Saaret_1 = new L.geoJson(json_Saaret_1, {
             attribution: '',
             interactive: true,
@@ -135,11 +123,54 @@
             style: style_Saaret_1_0
         });
 
-        // Add Saaret_1 layer to bounds group and map
         var bounds_group = new L.featureGroup([]);
         bounds_group.addLayer(layer_Saaret_1);
         map.addLayer(layer_Saaret_1);
 
-        // Function to handle pop-up for Lydetyt_2 layer
         function pop_Lydetyt_2(feature, layer) {
-            var popupContent = '<table><tr><td colspan="2">' + (feature.properties['Nimi'] !== null ? autolinker.link(feature.properties['
+            var popupContent = '<table><tr><td colspan="2">' + (feature.properties['Nimi'] !== null ? autolinker.link(feature.properties['Nimi'].toLocaleString()) : '') + '</td></tr></table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+            layer.on('popupopen', function (e) {
+                addClassToPopupIfMedia(content, e.popup);
+            });
+            layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_Lydetyt_2_0() {
+            return {
+                pane: 'pane_Lydetyt_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,1.0)',
+                interactive: true
+            };
+        }
+
+        map.createPane('pane_Lydetyt_2');
+        map.getPane('pane_Lydetyt_2').style.zIndex = 402;
+        map.getPane('pane_Lydetyt_2').style['mix-blend-mode'] = 'normal';
+
+        var layer_Lydetyt_2 = new L.geoJson(json_Lydetyt_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Lydetyt_2',
+            layerName: 'layer_Lydetyt_2',
+            pane: 'pane_Lydetyt_2',
+            onEachFeature: pop_Lydetyt_2,
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, style_Lydetyt_2_0(feature));
+            }
+        });
+
+        bounds_group.addLayer(layer_Lydetyt_2);
+        map.addLayer(layer_Lydetyt_2);
+    </script>
+</body>
+</html>
