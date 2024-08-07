@@ -127,8 +127,25 @@
                 },
                 mouseover: highlightFeature,
             });
+	
+    var imageUrl = 'https://evkoor.github.io/images-webmap/public/' + feature.properties['KuvaKoodi'];
+    var imageSize = feature.properties['KuvanKoko'];
+		
             var popupContent = '<table>\
                     <tr>
+		     <td colspan="2">' + (feature.properties['Nimi'] !== null ? autolinker.link(feature.properties['Nimi'].toLocaleString()) : '') + '</td>\
+        </tr>\
+        <tr>\
+            <td colspan="2"><img src="' + imageUrl + '" style="' + imageSize + '"></td>\
+        </tr>\
+    </table>';
+
+    var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+    layer.on('popupopen', function(e) {
+        addClassToPopupIfMedia(content, e.popup);
+    });
+    layer.bindPopup(content, { maxHeight: 400 });
+}
     <td colspan="2">' + (feature.properties['Nimi'] !== null ? autolinker.link(feature.properties['Nimi'].toLocaleString()) : '') + '</td>
 </tr>
 <tr>
