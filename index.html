@@ -137,8 +137,11 @@
                 (feature.properties['name'] ? autolinker.link(feature.properties['name'].toLocaleString()) : '') +
                 '</td></tr>';
 
-            if (feature.properties['imageUrl']) {
-                popupContent += '<tr><td><img src="' + feature.properties['imageUrl'] + '" style="max-width: 100%; height: auto;"></td></tr>';
+            // Check for image URL and add it if present
+            if (feature.properties[KuvaKoodi]) {
+                popupContent += '<tr><td><img src="' + feature.properties[KuvaKoodi] + '" style="max-width: 100%; height: auto;" /></td></tr>';
+            } else {
+                console.log('No image URL found for feature', feature.properties);
             }
 
             popupContent += '</table>';
@@ -197,8 +200,11 @@
                 (feature.properties['Nimi'] ? autolinker.link(feature.properties['Nimi'].toLocaleString()) : '') +
                 '</td></tr>';
 
-            if (feature.properties['imageUrl']) {
-                popupContent += '<tr><td><img src="' + feature.properties['imageUrl'] + '" style="max-width: 100%; height: auto;"></td></tr>';
+            // Check for image URL and add it if present
+            if (feature.properties[KuvaKoodi]) {
+                popupContent += '<tr><td><img src="' + feature.properties[KuvaKoodi] + '" style="max-width: 100%; height: auto;" /></td></tr>';
+            } else {
+                console.log('No image URL found for feature', feature.properties);
             }
 
             popupContent += '</table>';
