@@ -128,9 +128,14 @@
                 mouseover: highlightFeature,
             });
             var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
-                    </tr>\
+                    <tr>
+    <td colspan="2">' + (feature.properties['Nimi'] !== null ? autolinker.link(feature.properties['Nimi'].toLocaleString()) : '') + '</td>
+</tr>
+<tr>
+    <td colspan="2">
+        <img src="https://evkoor.github.io/images-webmap/public/' + feature.properties['KuvaKoodi'] + '" style="' + feature.properties['KuvanKoko'] + '">
+    </td>
+</tr>
                 </table>';
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
 			layer.on('popupopen', function(e) {
@@ -179,16 +184,20 @@
                 },
                 mouseover: highlightFeature,
             });
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Nimi'] !== null ? autolinker.link(feature.properties['Nimi'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
-			layer.bindPopup(content, { maxHeight: 400 });
+         var popupContent = '<table>\
+                <tr>\
+                    <td colspan="2">' + (feature.properties['Nimi'] !== null ? autolinker.link(feature.properties['Nimi'].toLocaleString()) : '') + '</td>\
+                </tr>\
+                <tr>\
+                    <td colspan="2"><img src="https://evkoor.github.io/images-webmap/public/' + feature.properties['KuvaKoodi'] + '" style="' + feature.properties['KuvanKoko'] + '"></td>\
+                </tr>\
+            </table>';
+
+        var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+        layer.on('popupopen', function(e) {
+            addClassToPopupIfMedia(content, e.popup);
+        });
+        layer.bindPopup(content, { maxHeight: 400 });
         }
 
         function style_lydetyt_2_0(feature) {
