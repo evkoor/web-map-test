@@ -38,8 +38,8 @@
     <script src="js/labelgun.min.js"></script>
     <script src="js/labels.js"></script>
     <script src="js/leaflet-measure.js"></script>
-    <script src="data/saaripolygons_1.js"></script>
-    <script src="data/lydetyt_2.js"></script>
+    <script src="data/json_saaripolygons_1.js"></script>
+    <script src="data/json_lydetyt_2.js"></script>
     <script>
     var map = L.map('map', {
         zoomControl: false, 
@@ -104,7 +104,7 @@
         maxNativeZoom: 19
     }).addTo(map);
 
-    function pop_saaripolygons_1(feature, layer) {
+    function pop_json_saaripolygons_1(feature, layer) {
         layer.on({
             mouseout: function(e) {
                 for (var i in e.target._eventParents) {
@@ -135,9 +135,9 @@
         layer.bindPopup(content, { maxHeight: 400 });
     }
 
-    function style_saaripolygons_1_0() {
+    function style_json_saaripolygons_1_0() {
         return {
-            pane: 'pane_saaripolygons_1',
+            pane: 'pane_json_saaripolygons_1',
             opacity: 1,
             color: 'rgba(35,35,35,1.0)',
             dashArray: '',
@@ -151,21 +151,21 @@
         }
     }
 
-    map.createPane('pane_saaripolygons_1');
-    map.getPane('pane_saaripolygons_1').style.zIndex = 401;
-    map.getPane('pane_saaripolygons_1').style['mix-blend-mode'] = 'normal';
-    var layer_saaripolygons_1 = new L.geoJson(saaripolygons_1, {
+    map.createPane('pane_json_saaripolygons_1');
+    map.getPane('pane_json_saaripolygons_1').style.zIndex = 401;
+    map.getPane('pane_json_saaripolygons_1').style['mix-blend-mode'] = 'normal';
+    var layer_json_saaripolygons_1 = new L.geoJson(json_saaripolygons_1, {
         attribution: '',
         interactive: true,
-        dataVar: 'saaripolygons_1',
-        layerName: 'layer_saaripolygons_1',
-        pane: 'pane_saaripolygons_1',
-        onEachFeature: pop_saaripolygons_1,
-        style: style_saaripolygons_1_0
+        dataVar: 'json_saaripolygons_1',
+        layerName: 'layer_json_saaripolygons_1',
+        pane: 'pane_json_saaripolygons_1',
+        onEachFeature: pop_json_saaripolygons_1,
+        style: style_json_saaripolygons_1_0
     });
-    map.addLayer(layer_saaripolygons_1);
+    map.addLayer(layer_json_saaripolygons_1);
 
-    function pop_lydetyt_2(feature, layer) {
+    function pop_json_lydetyt_2(feature, layer) {
         layer.on({
             mouseout: function(e) {
                 for (var i in e.target._eventParents) {
@@ -196,11 +196,11 @@
         layer.bindPopup(content, { maxHeight: 400 });
     }
 
-    function style_lydetyt_2_0(feature) {
+    function style_json_lydetyt_2_0(feature) {
         switch (String(feature.properties['Varmuus'])) {
             case '0':
                 return {
-                    pane: 'pane_lydetyt_2',
+                    pane: 'pane_json_lydetyt_2',
                     radius: 4.0,
                     opacity: 1,
                     color: 'rgba(35,35,35,1.0)',
@@ -215,7 +215,7 @@
                 };
             case '1':
                 return {
-                    pane: 'pane_lydetyt_2',
+                    pane: 'pane_json_lydetyt_2',
                     radius: 4.0,
                     opacity: 1,
                     color: 'rgba(35,35,35,1.0)',
@@ -230,7 +230,7 @@
                 };
             default:
                 return {
-                    pane: 'pane_lydetyt_2',
+                    pane: 'pane_json_lydetyt_2',
                     radius: 4.0,
                     opacity: 1,
                     color: 'rgba(35,35,35,1.0)',
@@ -246,21 +246,21 @@
         }
     }
 
-    map.createPane('pane_lydetyt_2');
-    map.getPane('pane_lydetyt_2').style.zIndex = 402;
-    map.getPane('pane_lydetyt_2').style['mix-blend-mode'] = 'normal';
-    var layer_lydetyt_2 = new L.geoJson(lydetyt_2, {
+    map.createPane('pane_json_lydetyt_2');
+    map.getPane('pane_json_lydetyt_2').style.zIndex = 402;
+    map.getPane('pane_json_lydetyt_2').style['mix-blend-mode'] = 'normal';
+    var layer_json_lydetyt_2 = new L.geoJson(json_lydetyt_2, {
         attribution: '',
         interactive: true,
-        dataVar: 'lydetyt_2',
-        layerName: 'layer_lydetyt_2',
-        pane: 'pane_lydetyt_2',
-        onEachFeature: pop_lydetyt_2,
+        dataVar: 'json_lydetyt_2',
+        layerName: 'layer_json_lydetyt_2',
+        pane: 'pane_json_lydetyt_2',
+        onEachFeature: pop_json_lydetyt_2,
         pointToLayer: function (feature, latlng) {
-            return L.circleMarker(latlng, style_lydetyt_2_0(feature));
+            return L.circleMarker(latlng, style_json_lydetyt_2_0(feature));
         }
     });
-    map.addLayer(layer_lydetyt_2);
+    map.addLayer(layer_json_lydetyt_2);
 
     function setBounds() {
         var bounds = L.latLngBounds([
